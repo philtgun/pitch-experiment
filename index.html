@@ -1,0 +1,89 @@
+<!doctype HTML>
+<html lang="en">
+  <head>
+    <title>Pitch difference experiment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+
+  <body>
+    <div class="container text-center">
+      <h1>Pitch difference experiment</h1>
+
+      <div id="div-intro">
+        <p>This experiment should not take more then 10 minutes of your time.</p>
+        <p>You will hear two tones for each test case. Each tone will be 0.5 s long with a 0.5 s of silence between them. After hearing the tones please answer if you perceive the pitch difference or not. The test case will be advanced automatically after you click Yes/No button below. There will be in total 50 test cases.</p>
+        <p>Please find a quiet place and use headphones. Click the button below to hear a test tone and adjust your system volume so that you feel comfortable with the level of the tone. The loudness will not change throughour the experiment.</p>
+        <div id="alert-restart" class="alert alert-warning" role="alert" style="display: none;">
+          It appears that you have already started the test but not finished it! You can either continue from where you left off or start over.
+        </div>
+        <button id="btn-test" class="btn btn-secondary">Test tone</button>
+        <button id="btn-start" class="btn btn-primary">Start</button>
+        <button id="btn-continue" class="btn btn-primary" style="display: none;">Continue</button>
+      </div>
+
+      <div id="div-tests" style="display: none;">
+        <div class="progress">
+          <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+        </div>
+        
+        <div class="form-group">
+          <h3>Test #<span id="text-number">1</span> <i id="btn-repeat" class="fa fa-repeat btn btn-secondary" aria-hidden="true"></i></h3>
+        </div>
+
+        <div class="form-group">
+          <p>Do you hear the difference in pitch?</p>
+          <button class="btn btn-success" id="btn-yes">Yes</button>
+          <button class="btn btn-danger" id="btn-no">No</button>
+        </div>
+      </div>
+
+      <div id="div-submit" style="display: none;">
+        <p>
+        You have finished the experiment! Thank you very much for participation! Please answer a few questions below and submit your results. </p>
+
+        <form id="meta">
+          <div class="col-sm-6 mx-auto">
+            <div class="form-group row">
+              <label for="input-sex" class="col-sm-4 col-form-label">Sex</label>
+              <select class="form-control col-sm-8" name="sex">
+                <option value="NA">N/A</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+            </div>
+
+            <div class="form-group row">
+              <label for="input-age" class="col-sm-4 col-form-label">Age</label>
+              <input type="number" class="form-control col-sm-8" name="age" placeholder="Age">
+            </div>
+
+            <div class="form-group row">
+              <label for="input-music" class="col-sm-4 ">Musical training</label>
+              <select class="form-control col-sm-8" name="musicTraining">
+                <option value="<1">None</option>
+                <option value="1">&lt; 1 year</option>
+                <option value="2-5">2 - 5 years</option>
+                <option value="5-10">5 - 10 years</option>
+                <option value=">10">&gt; 10 years</option>
+              </select>
+            </div>
+
+            <div class="form-group row">
+              <button type="button" class="btn btn-primary mx-auto" id="btn-submit">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script src="webpd-latest.min.js"></script>
+  <script src="main.js"></script>
+</html>
