@@ -79,23 +79,31 @@ $.get('patch.pd', function(patchStr) {
     data.data = tests;
 
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
-    var tempDom = document.createElement('a');
-    tempDom.setAttribute("href", dataStr);
-    tempDom.setAttribute("download", "data.json");
-    tempDom.click();
-    tempDom.remove();
+    fakeClickA({
+      href: dataStr,
+      download: 'data.json'
+    });
 
     localStorage.clear();
   });
 
   $("#btn-submit").click(function() {
-    var tempDom = document.createElement('a');
-    tempDom.setAttribute("href", 'mailto:philip.tovstogan01@estudiant.upf.edu?subject=Pitch%20Experiment&body=The%20data%20is%20attached.');
-    tempDom.setAttribute('target', '_blank');
-    tempDom.click();
-    tempDom.remove();
+    fakeClickA({
+      href: 'mailto:philip.tovstogan01@estudiant.upf.edu?subject=Pitch%20Experiment&body=The%20data%20is%20attached.',
+      target: '_blank'
+    });
   });
 });
+
+function fakeClickA(attrs) {
+    var tempDom = document.createElement('a');
+    document.body.appendChild(tempDom);
+    for (var key in attrs) {
+      tempDom.setAttribute(key, attrs[key]);
+    }
+    tempDom.click();
+    tempDom.remove();  
+}
 
 function transition() {
     updateUI();
