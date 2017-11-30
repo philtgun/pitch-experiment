@@ -40,6 +40,22 @@ $.get('patch.pd', function(patchStr) {
     updateAndAdvance(0);
   });
 
+  $(document).keypress(function(e) {
+    switch (e.key) {
+        case '1':
+        case 'y':
+            updateAndAdvance(1);
+            break;
+        case '2':
+        case 'n':
+            updateAndAdvance(0);
+            break;
+        case '3':
+        case 'r':
+            testPlay();
+    }
+  });
+
   if(localStorage.getItem('index')) {
     btnContinue.show();
     btnStart.html('Start over');
@@ -50,7 +66,7 @@ $.get('patch.pd', function(patchStr) {
 
   textNumber = $('#text-number');
 
-  $('#btn-submit').click(function() {
+  $('#btn-download').click(function() {
     dataSerial = $('#meta').serializeArray();
     data = {};
     dataSerial.forEach(function(item) {
@@ -58,7 +74,22 @@ $.get('patch.pd', function(patchStr) {
     });
     data.data = tests;
 
-    console.log(data);
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+    var tempDom = document.createElement('a');
+    tempDom.setAttribute("href", dataStr);
+    tempDom.setAttribute("download", "data.json");
+    tempDom.click();
+    tempDom.remove();
+
+    localStorage.clear();
+  });
+
+  $("#btn-submit").click(function() {
+    var tempDom = document.createElement('a');
+    tempDom.setAttribute("href", 'mailto:philip.tovstogan01@estudiant.upf.edu?subject=Pitch%20Experiment&body=The%20data%20is%20attached.');
+    tempDom.setAttribute('target', '_blank');
+    tempDom.click();
+    tempDom.remove();
   });
 });
 

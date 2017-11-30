@@ -15,8 +15,8 @@
 
       <div id="div-intro">
         <p>This experiment should not take more then 10 minutes of your time.</p>
-        <p>You will hear two tones for each test case. Each tone will be 0.5 s long with a 0.5 s of silence between them. After hearing the tones please answer if you perceive the pitch difference or not. The test case will be advanced automatically after you click Yes/No button below. There will be in total 50 test cases.</p>
-        <p>Please find a quiet place and use headphones. Click the button below to hear a test tone and adjust your system volume so that you feel comfortable with the level of the tone. The loudness will not change throughour the experiment.</p>
+        <p>Please find a quiet place and use headphones. Click the button below to hear a test tone and adjust your system volume so that you feel comfortable with the level of the tone. The loudness will not change throughout the experiment.</p>
+        <p>You will hear two tones for each test case. Each tone will be 0.5 s long with a 0.5 s of silence between them (same as test tone). After hearing the tones please answer if you perceive the pitch difference or not. The test case will be advanced automatically after you click Yes/No button below. There will be in total 50 test cases.</p>
         <div id="alert-restart" class="alert alert-warning" role="alert" style="display: none;">
           It appears that you have already started the test but not finished it! You can either continue from where you left off or start over.
         </div>
@@ -39,11 +39,13 @@
           <button class="btn btn-success" id="btn-yes">Yes</button>
           <button class="btn btn-danger" id="btn-no">No</button>
         </div>
+
+          <div class="alert alert-info" role="alert">Note: you can also use <b>1/2/3</b> or <b>y/n/r</b> keys to answer and replay sound</div>
       </div>
 
       <div id="div-submit" style="display: none;">
         <p>
-        You have finished the experiment! Thank you very much for participation! Please answer a few questions below and submit your results. </p>
+        You have finished the experiment! Thank you very much for participation! Please answer a few questions below and submit your results. You will download the data.json file once you click 'Download' button. After than click 'Submit' button that will open window with new e-mail. Please <u>don't forget to attach the downloaded file</u> to e-mail and send it.</p>
 
         <form id="meta">
           <div class="col-sm-6 mx-auto">
@@ -73,7 +75,10 @@
             </div>
 
             <div class="form-group row">
-              <button type="button" class="btn btn-primary mx-auto" id="btn-submit">Submit</button>
+              <div class="mx-auto">
+                <button type="button" class="btn btn-primary" id="btn-download">Download</button>           
+                <button type="button" class="btn btn-success" id="btn-submit">Submit</button>
+              </div>
             </div>
           </div>
         </form>
