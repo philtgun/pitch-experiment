@@ -4,13 +4,17 @@ var patch, textNumber, tests, testIndex;
 var pitches = [220, 1000];
 var diffs = [0, 0.5, 1, 2, 3];
 var harms = [0, 1, 2, 3, 4];
+var volume = {
+  1000: 80,
+  220: 90
+};
 
 $.get('patch.pd', function(patchStr) {
   patch = Pd.loadPatch(patchStr);
   Pd.start();
 
   $('#btn-test').click(function() {
-    pdPlay(1000, 0, 0);
+    pdPlay(pitches[1], diffs[0], harms[0], volume[pitches[1]]);
   });
 
 
@@ -122,10 +126,11 @@ function updateUI() {
 }
 
 function testPlay() {
-    pdPlay(tests[testIndex][0], tests[testIndex][1], tests[testIndex][2]);
+    pdPlay(tests[testIndex][0], tests[testIndex][1], tests[testIndex][2], volume[tests[testIndex][0]]);
 }
 
-function pdPlay(pitch, diff, harm) {
+function pdPlay(pitch, diff, harm, volume) {
+  Pd.send('volume', [volume]);
   Pd.send('harm', [harm]);
   Pd.send('diff', [diff]);
   Pd.send('input', [pitch]);
