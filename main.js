@@ -22,14 +22,12 @@ $.get('patch.pd', function(patchStr) {
   btnStart.click(function() {
     testIndex = 0;
     tests = generateTests();
-    transition();
+    updateUI(true);
   });
 
   var btnContinue = $('#btn-continue');
   btnContinue.click(function() {
-    testIndex = parseInt(localStorage.getItem('index'));
-    tests = JSON.parse(localStorage.getItem('tests'));
-    transition();
+    updateUI(true);
   });
 
   $('#btn-repeat').click(function() {
@@ -60,12 +58,19 @@ $.get('patch.pd', function(patchStr) {
     }
   });
 
-  if(localStorage.getItem('index')) {
+  testIndex = localStorage.getItem('index');
+  
+  if(testIndex) {
     btnContinue.show();
     btnStart.html('Start over');
     btnStart.removeClass('btn-primary');
     btnStart.addClass('btn-warning');
-    $('#alert-restart').show();
+
+    tests = JSON.parse(localStorage.getItem('tests'));
+    if(testIndex < tests.length)
+      $('#alert-restart').show();
+    else
+      $('#alert-finished').show();
   }
 
   textNumber = $('#text-number');
@@ -83,8 +88,6 @@ $.get('patch.pd', function(patchStr) {
       href: dataStr,
       download: 'data.json'
     });
-
-    localStorage.clear();
   });
 
   $("#btn-submit").click(function() {
@@ -105,13 +108,6 @@ function fakeClickA(attrs) {
     tempDom.remove();  
 }
 
-function transition() {
-    updateUI();
-    $('#div-intro').hide();
-    $('#div-tests').show();
-    testPlay();
-}
-
 function updateAndAdvance(value) {
     tests[testIndex][3] = value;
     testIndex += 1;
@@ -119,18 +115,23 @@ function updateAndAdvance(value) {
     localStorage.setItem('tests', JSON.stringify(tests));
     localStorage.setItem('index', testIndex);
 
-    if (testIndex >= tests.length) {
-        $('#div-tests').hide();
-        $('#div-submit').show();
-    } else {
-        updateUI();
-        testPlay();
-    }
+    updateUI();
 }
 
-function updateUI() {
-    $('#text-number').html(testIndex+1);
-    setProgress(testIndex / tests.length * 100);
+function updateUI(first) {
+    if (first) {
+      $('#div-intro').hide();
+      $('#div-tests').show();      
+    }
+
+    if (testIndex >= tests.length) {
+      $('#div-tests').hide();
+      $('#div-submit').show();
+    } else {
+      $('#text-number').html(testIndex+1);
+      setProgress(testIndex / tests.length * 100);
+      testPlay();
+    }  
 }
 
 function testPlay() {
