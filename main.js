@@ -2,7 +2,7 @@
 var patch, textNumber, tests, testIndex;
 
 var pitches = [220, 1000];
-var diffs = [0, 0.5, 1, 2, 3];
+var diffs = [0, 5, 10, 20, 30];
 var harms = [0, 1, 2, 3, 4];
 var volume = {
   1000: 80,
